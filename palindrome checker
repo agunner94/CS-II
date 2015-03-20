@@ -1,0 +1,68 @@
+//  Checks a string to see if it's a palindrome.
+//  Ignores differences in case and punctuation.
+//  Based on a solution submitted by Brent Davis, Fall 2010.
+
+#include <iostream>
+#include <cctype>
+#include "StackType dyn.h"
+
+using namespace std;
+
+const int MAX_STRING = 100;
+
+int main()
+{
+  char ch;
+  int length = 0;
+  StackType<char> s1(MAX_STRING);
+
+  cout << "enter string: ";
+  cin.get(ch);
+  while (ch != '\n') 
+  {
+	  if (isalpha(ch))
+	  {
+		s1.Push( tolower(ch) );
+		length++;
+	  }
+
+      cin.get(ch);
+  }
+
+  // copy the second half of the string into the other stack
+  int halfLen = length/2;
+  StackType<char> s2(halfLen);
+
+  for (int i = 0; i < halfLen; i++ ) 
+  {
+	  s1.Pop(ch);
+	  s2.Push(ch);
+  }
+
+  // other stack now contains the second half, but backwards
+
+  // if there are an odd number of characters in the string
+  // the middle character doesn't matter
+  if (length % 2 == 1) 
+  { 
+	  s1.Pop(ch); 
+  }
+
+  // check if stacks are equal
+  bool areEqual = true;
+  char ch2;
+  while (!s1.IsEmpty() && areEqual) 
+  {
+	  s1.Pop(ch);
+	  s2.Pop(ch2);
+	  areEqual = (ch == ch2);
+  }
+
+  if (areEqual) 
+  	  cout << "Palindrome!\n";
+  else
+	  cout << "Not a palindrome!\n";
+ 
+  return 0;
+}
+
