@@ -5,9 +5,7 @@ Binary Tree
 Priority Queue
 Queue Dyn Array
 Queue Linked
-Recursion
 Sorted List Linked
-Sorting
 Stack Dyn Array
 Stack Linked
 UnSorted list array
